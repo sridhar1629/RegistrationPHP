@@ -30,9 +30,12 @@ class FormController
         $business->location = $request->postcode;
         $business->user_id = $user->id;
         $business->save();
-
-
-        return redirect('/')->with('success', 'Registration successful!');
+        return redirect()->route('joblisting.create')->with([
+            'user_id' => $user->id,
+            'location' => $business->location,
+            'company_id'=>$business->id,
+            'company_name'=>$business->name,
+        ])->with('success', 'Registration successful!');
     }
 }
 
